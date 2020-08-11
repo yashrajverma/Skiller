@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "177704724907",
+    "firebase_url": "https://skiller-e13c0.firebaseio.com",
+    "project_id": "skiller-e13c0",
+    "storage_bucket": "skiller-e13c0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:177704724907:android:76e22c483859c457408aee",
+        "android_client_info": {
+          "package_name": "com.yashraj.skiller"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "177704724907-5t8mi24c9j14kd864tr6kbqscdjk990a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.yashraj.skiller",
+            "certificate_hash": "fc9cfcec49051aa48a54b3118848ae51534622cb"
+          }
+        },
+        {
+          "client_id": "177704724907-5vi7oiuaas50pii844k78khpcqfrfsug.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCA289Uo81sixNHOjnMa6txJPEDqm3USNo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "177704724907-5vi7oiuaas50pii844k78khpcqfrfsug.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
