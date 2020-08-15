@@ -28,7 +28,7 @@ public class DashboardActivity extends AppCompatActivity {
                     break;
 
                 case R.id.dash_app_profile:
-                    selectedFragment = new SettingsFragment();
+                    selectedFragment = new ProfileFragment();
                     break;
             }
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, selectedFragment).commit();
