@@ -43,7 +43,7 @@ public class RegistrationActivity extends AppCompatActivity {
     private PhoneAuthProvider.ForceResendingToken mResendToken;
     private String mVerificationId;
     private ProgressDialog loadingbar;
-    private String TAG;
+    private String TAG=RegistrationActivity.class.getName();
     private FirebaseUser mUser;
     private DatabaseReference databaseReference;
 

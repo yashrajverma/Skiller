@@ -4,15 +4,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    tools:context=".CategoryFragment">
+    tools:context=".Fragments.CategoryFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Category"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="30sp" />
+        android:layout_height="match_parent">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Category"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="30sp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/category_recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="60dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"/>
+    </RelativeLayout>
+
 
 </FrameLayout>

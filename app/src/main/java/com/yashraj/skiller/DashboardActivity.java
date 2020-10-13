@@ -9,6 +9,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.yashraj.skiller.Fragments.CategoryFragment;
+import com.yashraj.skiller.Fragments.HomeFragment;
+import com.yashraj.skiller.Fragments.NotificationsFragment;
+import com.yashraj.skiller.Fragments.ProfileFragment;
 
 public class DashboardActivity extends AppCompatActivity {
     BottomNavigationView.OnNavigationItemSelectedListener navListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
