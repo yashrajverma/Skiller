@@ -1,4 +1,4 @@
-package com.yashraj.skiller;
+package com.yashraj.skiller.Activities;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
@@ -27,6 +27,7 @@ import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.database.DatabaseReference;
 import com.hbb20.CountryCodePicker;
+import com.yashraj.skiller.R;
 
 import java.util.concurrent.TimeUnit;
 
@@ -43,7 +44,7 @@ public class RegistrationActivity extends AppCompatActivity {
     private PhoneAuthProvider.ForceResendingToken mResendToken;
     private String mVerificationId;
     private ProgressDialog loadingbar;
-    private String TAG=RegistrationActivity.class.getName();
+    private final String TAG=RegistrationActivity.class.getName();
     private FirebaseUser mUser;
     private DatabaseReference databaseReference;
 

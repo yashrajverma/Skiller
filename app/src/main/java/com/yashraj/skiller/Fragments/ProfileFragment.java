@@ -23,8 +23,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.yashraj.skiller.Activities.RegistrationActivity;
 import com.yashraj.skiller.R;
-import com.yashraj.skiller.RegistrationActivity;
 
 import java.util.HashMap;
 
@@ -52,7 +52,7 @@ public class ProfileFragment extends Fragment {
         mAuth=FirebaseAuth.getInstance();
         mUser=mAuth.getCurrentUser();
         databaseReference= FirebaseDatabase.getInstance().getReference().child("User_database");
-        logout_button=(Button) context.findViewById(R.id.logout_Button);
+        logout_button= context.findViewById(R.id.logout_Button);
         save_button=context.findViewById(R.id.save_Button);
         usernameET=context.findViewById(R.id.username_edittext);
         mobileET=context.findViewById(R.id.username_mobile);

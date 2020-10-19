@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.BookService">
+
+    <RelativeLayout
+        android:id="@+id/header_book"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="@drawable/toolbarcard">
+
+        <ImageView
+            android:id="@+id/logo_skiller"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/ic_icon" />
+
+        <TextView
+            android:id="@+id/skiller"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@id/logo_skiller"
+            android:text="@string/app_name"
+            android:textColor="@android:color/black"
+            android:textSize="28sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/desc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/skiller"
+            android:layout_marginStart="5dp"
+            android:layout_toRightOf="@id/logo_skiller"
+            android:text="@string/desc"
+            android:textColor="@android:color/black"
+            android:textSize="15sp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/book_vendor_details_relative_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/header_book"
+        android:visibility="gone"
+        android:background="@color/background">
+
+        <ImageView
+            android:id="@+id/book_service_image"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/mechanic" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_alignBottom="@id/book_service_image"
+            android:src="@drawable/shade" />
+
+       <androidx.cardview.widget.CardView
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_below="@id/book_service_image"
+           android:layout_marginTop="15dp"
+           android:layout_marginStart="15dp"
+           android:layout_marginEnd="15dp"
+           app:cardBackgroundColor="@color/white"
+           app:cardCornerRadius="5dp"
+
+           >
+           <RelativeLayout
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:padding="10dp">
+               <TextView
+                   android:id="@+id/book_service_vendor_name"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_marginStart="10dp"
+                   android:layout_marginTop="10dp"
+                   android:text="book_service_vendor_name"
+                   android:textColor="@color/black"
+                   android:textSize="24sp"
+                   android:textStyle="bold" />
+
+               <TextView
+                   android:id="@+id/book_Service_Type"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_below="@id/book_service_vendor_name"
+                   android:layout_marginStart="10dp"
+                   android:layout_marginTop="10dp"
+                   android:text="Service_Type"
+                   android:textColor="@color/black"
+                   android:textSize="22sp" />
+
+               <TextView
+                   android:id="@+id/book_service_rate"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_below="@id/book_Service_Type"
+                   android:layout_marginStart="10dp"
+                   android:layout_marginTop="10dp"
+                   android:text="Hourly Rate"
+                   android:textColor="@color/black"
+                   android:textSize="22sp" />
+
+               <TextView
+                   android:id="@+id/book_service_mobile"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_below="@id/book_service_rate"
+                   android:layout_marginStart="10dp"
+                   android:layout_marginTop="10dp"
+                   android:text="Service_book_mobile"
+                   android:textColor="@color/black"
+                   android:textSize="22sp" />
+
+           </RelativeLayout>
+       </androidx.cardview.widget.CardView>
+        <Button
+            android:id="@+id/book_service_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:fontFamily="@font/roboto"
+            android:gravity="center"
+            android:text="Book"
+            android:textStyle="bold" />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/book_vendor_address_relative_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/book_vendor_details_relative_layout"
+        android:visibility="visible"
+        android:background="@color/background">
+
+        <TextView
+            android:id="@+id/txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/roboto"
+            android:text="Provide Address \nDetails"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/book_vendor_username_layout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txt"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="15dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/req_username"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="Username"
+                android:inputType="textPersonName"
+                android:maxLines="1" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/book_vendor_mobile_layout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/book_vendor_username_layout"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="15dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/req_mobile"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="Mobile"
+                android:inputType="textPersonName"
+                android:maxLines="1" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/book_vendor_address_layout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/book_vendor_mobile_layout"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="15dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/req_address"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="Address"
+                android:inputType="textPersonName" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/book_vendor_city_layout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/book_vendor_address_layout"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="15dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/req_city"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="City"
+                android:inputType="textPersonName" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/book_vendor_desc_layout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/book_vendor_city_layout"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="15dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/req_desc"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="Add Description"
+                android:inputType="textPersonName" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/book_vendor_duration_layout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/book_vendor_desc_layout"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="15dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/req_duration"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="Add Duration in day"
+                android:inputType="number" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/book_submit_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="15dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginEnd="15dp"
+            android:text="Submit" />
+
+    </RelativeLayout>
+</RelativeLayout>

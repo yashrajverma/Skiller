@@ -1,4 +1,4 @@
-package com.yashraj.skiller;
+package com.yashraj.skiller.Activities;
 
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -13,6 +13,7 @@ import com.yashraj.skiller.Fragments.CategoryFragment;
 import com.yashraj.skiller.Fragments.HomeFragment;
 import com.yashraj.skiller.Fragments.NotificationsFragment;
 import com.yashraj.skiller.Fragments.ProfileFragment;
+import com.yashraj.skiller.R;
 
 public class DashboardActivity extends AppCompatActivity {
     BottomNavigationView.OnNavigationItemSelectedListener navListener = new BottomNavigationView.OnNavigationItemSelectedListener() {

@@ -16,7 +16,8 @@
         android:gravity="center"
         android:text="Notifications"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="30sp" />
+        android:textSize="30sp"
+        />
 
     <TextView
         android:layout_width="match_parent"

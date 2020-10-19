@@ -9,8 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.yashraj.skiller.DashboardActivity"/>
-        <activity android:name="com.yashraj.skiller.RegistrationActivity">
+        <activity android:name=".Activities.BookService"></activity>
+        <activity android:name=".Activities.ServiceProviderActivity" />
+        <activity android:name=".Activities.DashboardActivity" />
+        <activity android:name=".Activities.RegistrationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

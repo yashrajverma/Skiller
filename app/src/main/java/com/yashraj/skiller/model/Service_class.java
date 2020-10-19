@@ -2,7 +2,7 @@ package com.yashraj.skiller.model;
 
 public class Service_class {
     String service;
-    int image;
+    String image;
 
     public String getService() {
         return service;
@@ -12,18 +12,18 @@ public class Service_class {
         this.service = service;
     }
 
-    public int getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(int image) {
+    public void setImage(String image) {
         this.image = image;
     }
 
     public Service_class() {
     }
 
-    public Service_class(String service, int image) {
+    public Service_class(String service, String image) {
         this.service = service;
         this.image = image;
     }
