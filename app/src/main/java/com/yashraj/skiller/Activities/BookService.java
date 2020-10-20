@@ -29,17 +29,17 @@ import java.util.HashMap;
 
 public class BookService extends AppCompatActivity {
     TextView book_servicename, book_serviceType, book_service_mobile, book_hourly_rate;
-    String str_book_servicename, str_book_serviceType, str_book_service_mobile, str_book_hourly_rate, str_book_imageurl = "", senderUid, visitorUid;
+    String str_book_servicename, str_book_serviceType, str_book_service_mobile, str_book_imageurl = "", str_duration
+            ,senderUid, visitorUid, str_address, str_city, str_desc;
     Button book_service_button;
     DatabaseReference databaseReference, imagereference, book_service_reference, user_database;
     ImageView book_service_image;
     FirebaseAuth mAuth;
     private String currentstate;
-    TextInputEditText book_username, book_address, book_mobile, book_city,book_desc,book_duration;
+    TextInputEditText book_username, book_address, book_mobile, book_city, book_desc, book_duration;
     Button book_submit_button;
     RelativeLayout book_vendor_details_relativeLayout, book_vendor_address_relativeLayout;
-    String str_address;
-    String str_city;
+    private final String TAG = BookService.class.getName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,8 +56,8 @@ public class BookService extends AppCompatActivity {
         book_username = findViewById(R.id.req_username);
         book_address = findViewById(R.id.req_address);
         book_city = findViewById(R.id.req_city);
-        book_desc=findViewById(R.id.req_desc);
-        book_duration=findViewById(R.id.req_duration);
+        book_desc = findViewById(R.id.req_desc);
+        book_duration = findViewById(R.id.req_duration);
 
         book_submit_button = findViewById(R.id.book_submit_button);
         book_vendor_details_relativeLayout = findViewById(R.id.book_vendor_details_relative_layout);
@@ -83,7 +83,7 @@ public class BookService extends AppCompatActivity {
         book_service_mobile.setText(str_book_service_mobile);
         book_serviceType.setText(str_book_serviceType);
         book_servicename.setText(str_book_servicename);
-
+        UserData();
         imagereference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -108,11 +108,10 @@ public class BookService extends AppCompatActivity {
         book_submit_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(TextUtils.isEmpty(book_city.getText().toString()) && TextUtils.isEmpty(book_address.getText().toString()) && TextUtils.isEmpty(book_desc.getText().toString())
-                        && TextUtils.isEmpty(book_duration.getText().toString())){
-                    Toast.makeText(getApplicationContext(),"Provide Required Details",Toast.LENGTH_LONG).show();
-                }
-                else {
+                if (TextUtils.isEmpty(book_city.getText().toString()) && TextUtils.isEmpty(book_address.getText().toString()) && TextUtils.isEmpty(book_desc.getText().toString())
+                        && TextUtils.isEmpty(book_duration.getText().toString())) {
+                    Toast.makeText(getApplicationContext(), "Provide Required Details", Toast.LENGTH_LONG).show();
+                } else {
 
                     BOOKASERVICE();
                 }
@@ -120,18 +119,53 @@ public class BookService extends AppCompatActivity {
         });
     }
 
-    private void BOOKASERVICE() {
+    private void UserData() {
+        user_database.child(mAuth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    book_username.setText(snapshot.child("user_name").getValue().toString());
+                    book_mobile.setText(snapshot.child("user_mobile").getValue().toString());
+                    if (snapshot.hasChild("user_address") && snapshot.hasChild("user_city") && snapshot.hasChild("user_desc") && snapshot.hasChild("user_duration")) {
+                        str_address = snapshot.child("user_address").getValue().toString();
+                        str_desc = (snapshot.child("user_desc").getValue().toString());
+                        str_city = snapshot.child("user_city").getValue().toString();
+                        str_duration=snapshot.child("user_duration").getValue().toString();
 
-        str_address = book_address.getText().toString();
-        str_city = book_city.getText().toString();
+                        book_duration.setText(str_duration);
+                        book_city.setText(str_city);
+                        book_desc.setText(str_desc);
+                        book_address.setText(str_address);
+
+                    }
+
+                }
+                 else {
+                    Toast.makeText(getApplicationContext(), "Fill out the fields", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    private void BOOKASERVICE() {
+        str_address=book_address.getText().toString();
+        str_desc =book_desc.getText().toString();
+        str_city=book_city.getText().toString();
+        str_duration=book_duration.getText().toString();
 
         final HashMap<String, Object> map = new HashMap<>();
-        map.put("user_address", str_address);
+        map.put("user_address",str_address);
         map.put("user_city", str_city);
-        map.put("user_name",book_username.getText().toString());
-        map.put("user_mobile",book_mobile.getText().toString());
-        map.put("user_desc",book_desc.getText().toString());
-        map.put("user_duration",book_duration.getText().toString());
+        map.put("user_name",str_book_servicename);
+        map.put("user_mobile",str_book_service_mobile);
+        map.put("user_desc", str_desc);
+        map.put("user_duration", str_duration);
+        map.put("userid", senderUid);
 
         user_database.child(mAuth.getCurrentUser().getUid()).updateChildren(map);
 
@@ -152,12 +186,12 @@ public class BookService extends AppCompatActivity {
                                         currentstate = "booked";
                                         book_service_button.setEnabled(false);
                                         Toast.makeText(BookService.this, "Vendor Booked", Toast.LENGTH_SHORT).show();
-                                        book_service_reference.child(visitorUid)
-                                                .child(senderUid).child("details").updateChildren(map).addOnCompleteListener(new OnCompleteListener<Void>() {
+
+                                        book_service_reference.child(visitorUid).child("userId").child("details").updateChildren(map).addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
-                                                if(task.isSuccessful()){
-                                                    Intent intent=new Intent(BookService.this,DashboardActivity.class);
+                                                if (task.isSuccessful()) {
+                                                    Intent intent = new Intent(BookService.this, DashboardActivity.class);
                                                     startActivity(intent);
                                                     finish();
                                                 }

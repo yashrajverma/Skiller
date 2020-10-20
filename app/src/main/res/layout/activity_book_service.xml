@@ -50,7 +50,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/header_book"
-        android:visibility="gone"
+        android:visibility="visible"
         android:background="@color/background">
 
         <ImageView
@@ -147,7 +147,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/book_vendor_details_relative_layout"
-        android:visibility="visible"
+        android:visibility="gone"
         android:background="@color/background">
 
         <TextView
