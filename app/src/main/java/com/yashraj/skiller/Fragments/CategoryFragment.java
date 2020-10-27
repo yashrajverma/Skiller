@@ -40,13 +40,14 @@ public class CategoryFragment extends Fragment {
         View view=inflater.inflate(R.layout.fragment_category, container, false);
         categoryRecyclerView = view.findViewById(R.id.category_recyclerView);
         categoryRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
+        databaseReference=FirebaseDatabase.getInstance().getReference().child("Category");
         return view;
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        databaseReference=FirebaseDatabase.getInstance().getReference().child("Category");
+
         FirebaseRecyclerOptions<Service_class> options=new FirebaseRecyclerOptions.Builder<Service_class>().setQuery(databaseReference,Service_class.class).build();
         firebaseRecyclerAdapter=new FirebaseRecyclerAdapter<Service_class, ViewHolder>(options) {
             @NonNull

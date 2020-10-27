@@ -50,6 +50,8 @@ public class HomeFragment extends Fragment {
         View view=inflater.inflate(R.layout.fragment_home, container, false);
         featuredRecyclerView = view.findViewById(R.id.recyclerView_home);
         featuredRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext(),LinearLayoutManager.HORIZONTAL,true));
+        featuredRecyclerView.scrollToPosition(0);
+        databaseReference=FirebaseDatabase.getInstance().getReference().child("Category");
         return view;
     }
 
@@ -70,7 +72,7 @@ public class HomeFragment extends Fragment {
         imageCarousel.setAutoPlayDelay(3000);
 
 
-        databaseReference=FirebaseDatabase.getInstance().getReference().child("Category");
+
         FirebaseRecyclerOptions<Service_class> options=new FirebaseRecyclerOptions.Builder<Service_class>().setQuery(databaseReference,Service_class.class).build();
         firebaseRecyclerAdapter=new FirebaseRecyclerAdapter<Service_class, CategoryFragment.ViewHolder>(options) {
             @NonNull
@@ -102,7 +104,7 @@ public class HomeFragment extends Fragment {
         firebaseRecyclerAdapter.startListening();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder{
+    private static class ViewHolder extends RecyclerView.ViewHolder{
         ImageView imageView;
         TextView service_name;
 

@@ -63,7 +63,7 @@ public class ProfileFragment extends Fragment {
             public void onClick(View view) {
                 HashMap<String,Object> mapdata=new HashMap<>();
                 mapdata.put("user_name",usernameET.getText().toString());
-                mapdata.put("user_mobile",mobileET.getText().toString());
+                mapdata.put("phoneNo",mobileET.getText().toString());
                 mapdata.put("user_id", mUser.getUid());
                 databaseReference.child(mUser.getUid()).updateChildren(mapdata).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
@@ -82,9 +82,9 @@ public class ProfileFragment extends Fragment {
         databaseReference.child(mUser.getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()) {
+                if(snapshot.exists() && snapshot.hasChild("user_name") && snapshot.hasChild("phoneNo")) {
                     String str_username = snapshot.child("user_name").getValue().toString();
-                    str_mobile = snapshot.child("user_mobile").getValue().toString();
+                    str_mobile = snapshot.child("phoneNo").getValue().toString();
                     usernameET.setText(str_username);
                     mobileET.setText(str_mobile);
                 }
