@@ -57,12 +57,24 @@
         android:layout_below="@id/header_"
 
         />
+
+    <TextView
+        android:id="@+id/no_service_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:alpha="0.75"
+        android:fontFamily="@font/roboto"
+        android:text="No Provider for this service"
+        android:textColor="@color/black"
+        android:textSize="24sp" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/serviceprovider_recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/vendor"
         android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"/>
+        android:layout_marginEnd="10dp" />
 
 </RelativeLayout>

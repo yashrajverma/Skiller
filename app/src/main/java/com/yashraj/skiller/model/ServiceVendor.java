@@ -4,14 +4,17 @@ public class ServiceVendor {
     private String name;
     private String occupation;
     private String phoneNo;
+    private int charges;
 
-
-    public ServiceVendor(String name, String occupation,String phoneNo) {
+    public ServiceVendor(String name, String occupation, String phoneNo, int charges) {
         this.name = name;
         this.occupation = occupation;
         this.phoneNo = phoneNo;
+        this.charges = charges;
     }
-    public ServiceVendor(){}
+
+    public ServiceVendor() {
+    }
 
     public String getName() {
         return name;
@@ -36,4 +39,13 @@ public class ServiceVendor {
     public void setPhoneNo(String phoneNo) {
         this.phoneNo = phoneNo;
     }
+
+    public int getCharges() {
+        return charges;
+    }
+
+    public void setCharges(int charges) {
+        this.charges = charges;
+    }
+
 }

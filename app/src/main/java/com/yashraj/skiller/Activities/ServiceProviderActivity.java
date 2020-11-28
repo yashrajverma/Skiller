@@ -24,7 +24,8 @@ public class ServiceProviderActivity extends AppCompatActivity {
     private DatabaseReference databaseReference;
     private RecyclerView recyclerView;
     private FirebaseRecyclerAdapter<ServiceVendor,ServiceProvider> firebaseRecyclerAdapter;
-    private String occupation="";
+    private String occupation = "";
+    private TextView no_service_provider;
 
 
     @Override
@@ -34,8 +35,8 @@ public class ServiceProviderActivity extends AppCompatActivity {
         recyclerView=findViewById(R.id.serviceprovider_recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         databaseReference= FirebaseDatabase.getInstance().getReference().child("Vendors");
-        occupation=getIntent().getExtras().get("servicetype").toString();
-
+        occupation = getIntent().getExtras().get("servicetype").toString();
+        no_service_provider = findViewById(R.id.no_service_text);
     }
 
     @Override
@@ -49,20 +50,22 @@ public class ServiceProviderActivity extends AppCompatActivity {
         }
         firebaseRecyclerAdapter=new FirebaseRecyclerAdapter<ServiceVendor, ServiceProvider>(options) {
             @Override
-            protected void onBindViewHolder(@NonNull final ServiceProvider serviceProvider,final int i, @NonNull ServiceVendor serviceVendor) {
+            protected void onBindViewHolder(@NonNull final ServiceProvider serviceProvider, final int i, @NonNull final ServiceVendor serviceVendor) {
                 serviceProvider.servicetype.setText(serviceVendor.getOccupation());
-                serviceProvider.service_provider_name.setText(serviceVendor.getName());
-                serviceProvider.service_provider_mobile.setText(serviceVendor.getPhoneNo());
+                serviceProvider.service_provider_name.setText("Provider : " + serviceVendor.getName());
+                serviceProvider.service_provider_mobile.setText("Contact : " + serviceVendor.getPhoneNo());
+                no_service_provider.setVisibility(View.GONE);
 
                 serviceProvider.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        String visitorUid=getRef(i).getKey();
-                        Intent intent=new Intent(ServiceProviderActivity.this,BookService.class);
-                        intent.putExtra("servicetype",serviceProvider.servicetype.getText().toString());
-                        intent.putExtra("serviceprovider_name",serviceProvider.service_provider_name.getText().toString());
-                        intent.putExtra("serviceprovider_mobile",serviceProvider.service_provider_mobile.getText().toString());
-                        intent.putExtra("visitorUid",visitorUid);
+                        String visitorUid = getRef(i).getKey();
+                        Intent intent = new Intent(ServiceProviderActivity.this, BookService.class);
+                        intent.putExtra("servicetype", serviceProvider.servicetype.getText().toString());
+                        intent.putExtra("serviceprovider_name", serviceProvider.service_provider_name.getText().toString());
+                        intent.putExtra("serviceprovider_mobile", serviceProvider.service_provider_mobile.getText().toString());
+                        intent.putExtra("charges", serviceVendor.getCharges());
+                        intent.putExtra("visitorUid", visitorUid);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
 

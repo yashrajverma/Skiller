@@ -23,6 +23,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.yashraj.skiller.Activities.OrderHistoryActivity;
 import com.yashraj.skiller.Activities.RegistrationActivity;
 import com.yashraj.skiller.R;
 
@@ -31,17 +32,18 @@ import java.util.HashMap;
 public class ProfileFragment extends Fragment {
     FirebaseAuth mAuth;
     FirebaseUser mUser;
-    DatabaseReference databaseReference;
-    EditText usernameET,mobileET;
-    LinearLayout shareapp;
-    Button logout_button,save_button;
+    DatabaseReference databaseReference, completedDatabasereference;
+    EditText usernameET, mobileET;
+    LinearLayout shareapp, orderDetails;
+    Button logout_button, save_button;
     Activity context;
     String str_mobile;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        context=getActivity();
+        context = getActivity();
         return inflater.inflate(R.layout.fragment_profile, container, false);
 
     }
@@ -49,21 +51,30 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        mAuth=FirebaseAuth.getInstance();
-        mUser=mAuth.getCurrentUser();
-        databaseReference= FirebaseDatabase.getInstance().getReference().child("User_database");
-        logout_button= context.findViewById(R.id.logout_Button);
-        save_button=context.findViewById(R.id.save_Button);
-        usernameET=context.findViewById(R.id.username_edittext);
-        mobileET=context.findViewById(R.id.username_mobile);
-        str_mobile= mUser.getPhoneNumber();
+        mAuth = FirebaseAuth.getInstance();
+        mUser = mAuth.getCurrentUser();
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("User_database");
+        completedDatabasereference = FirebaseDatabase.getInstance().getReference().child("CompletedTask");
+        logout_button = context.findViewById(R.id.logout_Button);
+        save_button = context.findViewById(R.id.save_Button);
+        usernameET = context.findViewById(R.id.username_edittext);
+        mobileET = context.findViewById(R.id.username_mobile);
+        str_mobile = mUser.getPhoneNumber();
         mobileET.setText(str_mobile);
+        orderDetails = context.findViewById(R.id.orderDetails);
+        orderDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(context.getApplicationContext(), OrderHistoryActivity.class));
+            }
+        });
+
         save_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                HashMap<String,Object> mapdata=new HashMap<>();
-                mapdata.put("user_name",usernameET.getText().toString());
-                mapdata.put("phoneNo",mobileET.getText().toString());
+                HashMap<String, Object> mapdata = new HashMap<>();
+                mapdata.put("user_name", usernameET.getText().toString());
+                mapdata.put("phoneNo", mobileET.getText().toString());
                 mapdata.put("user_id", mUser.getUid());
                 databaseReference.child(mUser.getUid()).updateChildren(mapdata).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
@@ -95,8 +106,6 @@ public class ProfileFragment extends Fragment {
 
             }
         });
-
-
 
         logout_button.setOnClickListener(new View.OnClickListener() {
             @Override

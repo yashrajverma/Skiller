@@ -29,7 +29,9 @@ import java.util.HashMap;
 
 public class BookService extends AppCompatActivity {
     TextView book_servicename, book_serviceType, book_service_mobile, book_hourly_rate;
-    String str_book_servicename, str_book_serviceType, str_book_service_mobile, str_book_imageurl = "", str_duration, senderUid, visitorUid, str_address, str_city, str_desc, str_username;
+    String str_book_servicename, str_book_serviceType, str_book_service_mobile, str_book_imageurl = "",
+            str_duration, senderUid, visitorUid, str_address, str_city, str_desc, str_username;
+    int str_book_hourlyRate;
     Button book_service_button;
     DatabaseReference databaseReference, imagereference, book_service_reference, user_database;
     ImageView book_service_image;
@@ -56,7 +58,6 @@ public class BookService extends AppCompatActivity {
         book_city = findViewById(R.id.req_city);
         book_desc = findViewById(R.id.req_desc);
         book_duration = findViewById(R.id.req_duration);
-
         book_submit_button = findViewById(R.id.book_submit_button);
         book_vendor_details_relativeLayout = findViewById(R.id.book_vendor_details_relative_layout);
         book_vendor_address_relativeLayout = findViewById(R.id.book_vendor_address_relative_layout);
@@ -76,11 +77,14 @@ public class BookService extends AppCompatActivity {
         str_book_service_mobile = getIntent().getExtras().get("serviceprovider_mobile").toString();
         str_book_servicename = getIntent().getExtras().get("serviceprovider_name").toString();
         str_book_serviceType = getIntent().getExtras().get("servicetype").toString();
+        str_book_hourlyRate = getIntent().getExtras().getInt("charges");
 
 
         book_service_mobile.setText(str_book_service_mobile);
         book_serviceType.setText(str_book_serviceType);
         book_servicename.setText(str_book_servicename);
+        book_hourly_rate.setText(String.valueOf(str_book_hourlyRate));
+
         UserData();
         imagereference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -165,8 +169,8 @@ public class BookService extends AppCompatActivity {
         map.put("description", str_desc);
         map.put("duration", str_duration);
         map.put("userid", senderUid);
-        int cost = 200 * Integer.parseInt(str_duration);
 
+        int cost = str_book_hourlyRate * Integer.parseInt(str_duration);
         final HashMap<String, Object> map1 = new HashMap<>();
         map1.put("address", str_address);
         map1.put("location", str_city);
