@@ -1,6 +1,8 @@
 package com.yashraj.skiller.Activities;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +19,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.core.Path;
+import com.google.firebase.database.snapshot.ChildKey;
 import com.yashraj.skiller.R;
 import com.yashraj.skiller.model.OrderHistoryModel;
 
@@ -26,7 +30,9 @@ public class OrderHistoryActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private DatabaseReference completedDatabasereference;
     private FirebaseUser mUser;
+    Path path;
 
+    @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +43,8 @@ public class OrderHistoryActivity extends AppCompatActivity {
         orderRecyclerView = findViewById(R.id.oderHistoryRecyclerView);
         orderRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         orderRecyclerView.setHasFixedSize(true);
+        path = completedDatabasereference.getPath();
+        Log.i("TAG", "onCreate: Path to Completed" + path.toString());
 
     }
 
@@ -44,7 +52,8 @@ public class OrderHistoryActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        FirebaseRecyclerOptions<OrderHistoryModel> options = new FirebaseRecyclerOptions.Builder<OrderHistoryModel>().setQuery(completedDatabasereference, OrderHistoryModel.class)
+        @SuppressLint("RestrictedApi") FirebaseRecyclerOptions<OrderHistoryModel> options = new FirebaseRecyclerOptions.Builder<OrderHistoryModel>().setQuery(completedDatabasereference.
+                orderByChild(String.valueOf(path.child(ChildKey.fromString(mUser.getUid())))), OrderHistoryModel.class)
                 .build();
         firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<OrderHistoryModel, OrderDetailsViewHolder>(options) {
             @Override
