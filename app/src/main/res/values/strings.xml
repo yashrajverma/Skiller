@@ -5,4 +5,15 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="logout">Logout</string>
     <string name="save">Save</string>
+    <string name="ac">AC Repair</string>
+    <string name="salon">Beauty &amp; Salon</string>
+    <string name="carpenter">Carpenter</string>
+    <string name="clean_and_disinfect">Cleaner &amp; Disinfector</string>
+    <string name="cleaning">Cleaning</string>
+    <string name="electrician">Electrician</string>
+    <string name="mechanic">Mechanic</string>
+    <string name="painter">Painter</string>
+    <string name="plumber">Plumber</string>
+
+
 </resources>

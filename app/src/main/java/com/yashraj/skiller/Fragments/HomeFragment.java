@@ -4,9 +4,11 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -39,6 +41,7 @@ public class HomeFragment extends Fragment {
     DatabaseReference databaseReference;
     FirebaseRecyclerAdapter<Service_class, CategoryFragment.ViewHolder> firebaseRecyclerAdapter;
     RecyclerView featuredRecyclerView;
+    ImageButton salon_image, ac_image, car_image, spa_image, clean_image, electric_image;
 
     private final ArrayList<String> imageUrls = new ArrayList<>();
 
@@ -47,11 +50,21 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         context = getActivity();
-        View view=inflater.inflate(R.layout.fragment_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
         featuredRecyclerView = view.findViewById(R.id.recyclerView_home);
-        featuredRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext(),LinearLayoutManager.HORIZONTAL,true));
-        featuredRecyclerView.scrollToPosition(0);
-        databaseReference=FirebaseDatabase.getInstance().getReference().child("Category");
+        featuredRecyclerView.setLayoutManager(new LinearLayoutManager(view.getContext(), LinearLayoutManager.HORIZONTAL, true));
+        featuredRecyclerView.scrollToPosition(1);
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("Category");
+
+        salon_image = view.findViewById(R.id.salon_image);
+        car_image = view.findViewById(R.id.car_image);
+        ac_image = view.findViewById(R.id.ac_image);
+        spa_image = view.findViewById(R.id.spa_image);
+        clean_image = view.findViewById(R.id.clean_image);
+        electric_image = view.findViewById(R.id.electric_image);
+        OnClickListeners();
+        String str = getResources().getString(R.string.ac);
+        Log.w("Home", "onStart:Value of ac " + str);
         return view;
     }
 
@@ -70,7 +83,6 @@ public class HomeFragment extends Fragment {
         imageCarousel.setCaptionTextSize(Utils.spToPx(20, context));
         imageCarousel.setAutoPlay(true);
         imageCarousel.setAutoPlayDelay(3000);
-
 
 
         FirebaseRecyclerOptions<Service_class> options=new FirebaseRecyclerOptions.Builder<Service_class>().setQuery(databaseReference,Service_class.class).build();
@@ -104,14 +116,73 @@ public class HomeFragment extends Fragment {
         firebaseRecyclerAdapter.startListening();
     }
 
-    private static class ViewHolder extends RecyclerView.ViewHolder{
+    private void OnClickListeners() {
+        salon_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), ServiceProviderActivity.class);
+                intent.putExtra("servicetype", getResources().getString(R.string.salon));
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+            }
+        });
+        ac_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), ServiceProviderActivity.class);
+                intent.putExtra("servicetype", getResources().getString(R.string.ac));
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+            }
+        });
+        spa_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), ServiceProviderActivity.class);
+                intent.putExtra("servicetype", getResources().getString(R.string.salon));
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+            }
+        });
+        car_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), ServiceProviderActivity.class);
+                intent.putExtra("servicetype", getResources().getString(R.string.mechanic));
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+            }
+        });
+        clean_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), ServiceProviderActivity.class);
+                intent.putExtra("servicetype", getResources().getString(R.string.cleaning));
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+            }
+        });
+        electric_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), ServiceProviderActivity.class);
+                intent.putExtra("servicetype", getResources().getString(R.string.electrician));
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+            }
+        });
+
+
+    }
+
+    private static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
         TextView service_name;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            imageView=itemView.findViewById(R.id.service_image);
-            service_name=itemView.findViewById(R.id.service_name);
+            imageView = itemView.findViewById(R.id.service_image);
+            service_name = itemView.findViewById(R.id.service_name);
         }
     }
 }
