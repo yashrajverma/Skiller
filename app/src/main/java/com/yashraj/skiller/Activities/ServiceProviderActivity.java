@@ -52,8 +52,8 @@ public class ServiceProviderActivity extends AppCompatActivity {
             @Override
             protected void onBindViewHolder(@NonNull final ServiceProvider serviceProvider, final int i, @NonNull final ServiceVendor serviceVendor) {
                 serviceProvider.servicetype.setText(serviceVendor.getOccupation());
-                serviceProvider.service_provider_name.setText("Provider : " + serviceVendor.getName());
-                serviceProvider.service_provider_mobile.setText("Contact : " + serviceVendor.getPhoneNo());
+                serviceProvider.service_provider_name.setText(serviceVendor.getName());
+                serviceProvider.service_provider_mobile.setText(serviceVendor.getPhoneNo());
                 no_service_provider.setVisibility(View.GONE);
 
                 serviceProvider.itemView.setOnClickListener(new View.OnClickListener() {

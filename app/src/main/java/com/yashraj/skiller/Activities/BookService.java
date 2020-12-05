@@ -33,9 +33,9 @@ public class BookService extends AppCompatActivity {
             str_duration, senderUid, visitorUid, str_address, str_city, str_desc, str_username;
     int str_book_hourlyRate;
     Button book_service_button;
+    FirebaseAuth mAuth;
     DatabaseReference databaseReference, imagereference, book_service_reference, user_database;
     ImageView book_service_image;
-    FirebaseAuth mAuth;
     TextInputEditText book_username, book_address, book_mobile, book_city, book_desc, book_duration;
     Button book_submit_button;
     RelativeLayout book_vendor_details_relativeLayout, book_vendor_address_relativeLayout;
@@ -180,6 +180,7 @@ public class BookService extends AppCompatActivity {
         map1.put("duration", str_duration);
         map1.put("workId", senderUid);
         map1.put("charges", cost);
+        map1.put("accepted", "no");
 
         user_database.child(mAuth.getCurrentUser().getUid()).updateChildren(map);
 

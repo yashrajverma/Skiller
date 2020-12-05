@@ -1,14 +1,14 @@
 package com.yashraj.skiller.model;
 
 public class OrderHistoryModel {
-    private String charges;
+    private int charges;
     private String description;
     private String endingDate;
     private String location;
     private String vendorName;
     private String startingDate;
 
-    public OrderHistoryModel(String charges, String description, String endingDate, String location, String vendorName, String startingDate) {
+    public OrderHistoryModel(int charges, String description, String endingDate, String location, String vendorName, String startingDate) {
         this.charges = charges;
         this.description = description;
         this.endingDate = endingDate;
@@ -21,11 +21,11 @@ public class OrderHistoryModel {
 
     }
 
-    public String getCharges() {
+    public int getCharges() {
         return charges;
     }
 
-    public void setCharges(String charges) {
+    public void setCharges(int charges) {
         this.charges = charges;
     }
 

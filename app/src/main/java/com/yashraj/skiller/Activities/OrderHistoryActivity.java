@@ -2,7 +2,6 @@ package com.yashraj.skiller.Activities;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,8 +18,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.core.Path;
-import com.google.firebase.database.snapshot.ChildKey;
 import com.yashraj.skiller.R;
 import com.yashraj.skiller.model.OrderHistoryModel;
 
@@ -30,7 +27,6 @@ public class OrderHistoryActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private DatabaseReference completedDatabasereference;
     private FirebaseUser mUser;
-    Path path;
 
     @SuppressLint("RestrictedApi")
     @Override
@@ -39,12 +35,10 @@ public class OrderHistoryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_order_history);
         mAuth = FirebaseAuth.getInstance();
         mUser = mAuth.getCurrentUser();
-        completedDatabasereference = FirebaseDatabase.getInstance().getReference().child("CompletedTask");
+        completedDatabasereference = FirebaseDatabase.getInstance().getReference().child("CompletedTask/orderHistory");
         orderRecyclerView = findViewById(R.id.oderHistoryRecyclerView);
         orderRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         orderRecyclerView.setHasFixedSize(true);
-        path = completedDatabasereference.getPath();
-        Log.i("TAG", "onCreate: Path to Completed" + path.toString());
 
     }
 
@@ -52,10 +46,12 @@ public class OrderHistoryActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        @SuppressLint("RestrictedApi") FirebaseRecyclerOptions<OrderHistoryModel> options = new FirebaseRecyclerOptions.Builder<OrderHistoryModel>().setQuery(completedDatabasereference.
-                orderByChild(String.valueOf(path.child(ChildKey.fromString(mUser.getUid())))), OrderHistoryModel.class)
-                .build();
+        @SuppressLint("RestrictedApi") FirebaseRecyclerOptions<OrderHistoryModel> options =
+                new FirebaseRecyclerOptions.Builder<OrderHistoryModel>().setQuery(completedDatabasereference
+                        .orderByChild(mUser.getUid()), OrderHistoryModel.class)
+                        .build();
         firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<OrderHistoryModel, OrderDetailsViewHolder>(options) {
+            @SuppressLint("SetTextI18n")
             @Override
             protected void onBindViewHolder(@NonNull OrderDetailsViewHolder holder, int i, @NonNull OrderHistoryModel orderHistoryModel) {
                 holder.startingDate.setText(orderHistoryModel.getStartingDate());
@@ -63,7 +59,7 @@ public class OrderHistoryActivity extends AppCompatActivity {
                 holder.location.setText(orderHistoryModel.getLocation());
                 holder.description.setText(orderHistoryModel.getDescription());
                 holder.vendorName.setText(orderHistoryModel.getVendorName());
-                holder.charges.setText(orderHistoryModel.getCharges());
+                holder.charges.setText(Integer.toString(orderHistoryModel.getCharges()));
 
             }
 
@@ -76,7 +72,6 @@ public class OrderHistoryActivity extends AppCompatActivity {
         };
         firebaseRecyclerAdapter.startListening();
         orderRecyclerView.setAdapter(firebaseRecyclerAdapter);
-
 
     }
 
